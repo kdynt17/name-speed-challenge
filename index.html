@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f4f0e8" />
+    <meta
+      name="description"
+      content="첫 글자부터 Enter까지, 내 이름 타자 속도를 겨루는 로컬 순위 게임"
+    />
+    <meta property="og:title" content="내 이름, 누가 제일 빠를까?" />
+    <meta property="og:description" content="첫 글자부터 Enter까지 단 한 번의 질주" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="public/og.png" />
+    <title>이름 스프린트 | 누가 제일 빠를까?</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <main class="site-shell">
+      <div class="speed-lines speed-lines-left" aria-hidden="true"></div>
+      <div class="speed-lines speed-lines-right" aria-hidden="true"></div>
+
+      <section class="hero" aria-labelledby="page-title">
+        <div class="eyebrow">
+          <span class="live-dot" aria-hidden="true"></span>
+          NAME TYPING RACE
+        </div>
+        <h1 id="page-title">내 이름,<br /><span>누가 제일 빠를까?</span></h1>
+        <p>첫 글자부터 Enter까지 단 한 번의 질주.<br />이 컴퓨터에 최고 기록을 남겨보세요.</p>
+      </section>
+
+      <section class="game-card" aria-label="이름 타자 기록 측정">
+        <div class="card-topline">
+          <span>ROUND / NAME</span>
+          <span class="local-badge">LOCAL SCOREBOARD</span>
+        </div>
+
+        <form class="setup-panel" id="setup-form">
+          <label for="participant-name">참가자 이름</label>
+          <div class="setup-row">
+            <input
+              id="participant-name"
+              maxlength="20"
+              autocomplete="off"
+              placeholder="예: 김도연"
+              aria-describedby="setup-help"
+              autofocus
+            />
+            <button type="submit">도전 준비</button>
+          </div>
+          <p id="setup-help">이 이름과 똑같이 입력해야 기록이 저장됩니다.</p>
+        </form>
+
+        <div class="challenge-panel" id="challenge-panel" hidden>
+          <div class="target-row">
+            <div>
+              <span class="mini-label">TYPE THIS NAME</span>
+              <strong id="target-name"></strong>
+            </div>
+            <div class="timer" id="timer">
+              <span class="timer-status" id="timer-status">READY</span>
+              <b id="timer-value">0.000초</b>
+            </div>
+          </div>
+
+          <div class="typing-box" id="typing-box">
+            <input
+              id="typing-input"
+              autocomplete="off"
+              autocapitalize="off"
+              spellcheck="false"
+              maxlength="24"
+              placeholder="여기에 이름을 입력하세요"
+            />
+            <kbd>ENTER ↵</kbd>
+          </div>
+
+          <div class="status-row" aria-live="polite">
+            <span class="status-mark status-ready" id="status-mark" aria-hidden="true"></span>
+            <p id="status-message">첫 글자를 입력하는 순간 시간이 흐릅니다.</p>
+          </div>
+
+          <div class="result-strip" id="result-strip" aria-live="polite" hidden>
+            <div><span>이번 기록</span><strong id="result-time"></strong></div>
+            <div><span>현재 순위</span><strong id="result-rank"></strong></div>
+            <p id="result-message"></p>
+          </div>
+
+          <div class="action-row">
+            <button class="button-secondary" id="retry-button" type="button">다시 도전</button>
+            <button class="button-primary" id="next-button" type="button">
+              다음 참가자 <span aria-hidden="true">→</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="leaderboard" aria-labelledby="leaderboard-title">
+        <div class="leaderboard-heading">
+          <div>
+            <span class="mini-label">FASTEST ON THIS DEVICE</span>
+            <h2 id="leaderboard-title">실시간 순위</h2>
+          </div>
+          <div class="leaderboard-actions">
+            <span id="participant-count">0명 참가</span>
+            <button type="button" id="clear-button" hidden>기록 초기화</button>
+          </div>
+        </div>
+        <div class="empty-board" id="empty-board">
+          <span aria-hidden="true">01</span>
+          <p>아직 기록이 없어요.<br />첫 번째 이름을 가장 먼저 올려보세요!</p>
+        </div>
+        <ol class="ranking-list" id="ranking-list" hidden></ol>
+      </section>
+
+      <footer>
+        <p>기록은 이 브라우저에만 안전하게 저장됩니다.</p>
+        <span>NO LOGIN · NO DATABASE</span>
+      </footer>
+    </main>
+  </body>
+</html>
